@@ -1,0 +1,1 @@
+return external_call(global.ext_apclient_get_team_number);

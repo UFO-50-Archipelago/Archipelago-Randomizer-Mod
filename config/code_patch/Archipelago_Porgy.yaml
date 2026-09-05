@@ -1,0 +1,141 @@
+gml_Object_o10_Game_Create_0:
+  - type: findappend
+    find: |-
+      scrLoadGame();
+    code: |-
+      porgy_update_items();
+gml_Object_o10_BossLight_Step_0:
+  - type: findreplacetrim
+    find: |-
+      o10_Game.bossWins += 1;
+      o10_Game.itemCapacity = min(o10_Game.itemCapacity + 0.5, 4);
+    code: |-
+      if (droppedStory > -1)
+        collect_location((300 + droppedStory) - 8);
+gml_Object_o10_eAlien_Step_2:
+  - type: findreplace
+    find: |-
+      if (percentCompletion >= 100)
+    code: |-
+      complete = true;
+
+      for (var i = 1; complete && i <= 11; i++)
+        complete &= is_location_collected(i);
+      for (var i = 20; complete && i <= 27; i++)
+        complete &= is_location_collected(i);
+      for (var i = 50; complete && i <= 56; i++)
+        complete &= is_location_collected(i);
+      for (var i = 90; complete && i <= 93; i++)
+        complete &= is_location_collected(i);
+      for (var i = 100; complete && i <= 105; i++)
+        complete &= is_location_collected(i);
+      for (var i = 120; complete && i <= 125; i++)
+        complete &= is_location_collected(i);
+      for (var i = 150; complete && i <= 155; i++)
+        complete &= is_location_collected(i);
+      for (var i = 190; complete && i <= 192; i++)
+        complete &= is_location_collected(i);
+      for (var i = 200; complete && i <= 202; i++)
+        complete &= is_location_collected(i);
+      for (var i = 220; complete && i <= 225; i++)
+        complete &= is_location_collected(i);
+      for (var i = 250; complete && i <= 256; i++)
+        complete &= is_location_collected(i);
+      for (var i = 290; complete && i <= 292; i++)
+        complete &= is_location_collected(i);
+      for (var i = 300; complete && i <= 304; i++)
+        complete &= is_location_collected(i);
+      if (complete)
+gml_Object_o10_FishMom_Step_0:
+  - type: findreplace
+    find: |-
+      if (o10_Game.collectedEggs >= 20)
+    code: |-
+      if (o10_Game.collectedEggs >= 20 && false)
+  - type: findreplace
+    find: |-
+      o10_Game.collectedEggs = min(o10_Game.collectedEggs + 1, 20);
+    code: |-
+      collect_location(_item_id);
+  - type: findreplace
+    find: |-
+      if ((o10_Game.collectedEggs div 5) > (_eggcount div 5))
+    code: |-
+      if ((o10_Game.collectedEggs div 5) > (_eggcount div 5) && false)
+  - type: findreplace
+    find: |-
+      else if ((o10_Game.collectedEggs div 5) > (instance_number(o10_pOption) * 5))
+    code: |-
+      else if ((o10_Game.collectedEggs div 5) > (instance_number(o10_pOption) * 5) && false)
+  - type: findreplacetrim
+    find: |-
+      _clearDialogue = true;
+      var _joinedby = (o10_Game.collectedEggs div 5) - instance_number(o10_pOption);
+      
+      repeat (_joinedby)
+      {
+        with (instance_create(x, y, o10_pOption))
+        {
+          optionType = instance_number(o10_pOption) % 2;
+          followLerp = 0;
+        }
+      }
+    code: |-
+      _clearDialogue = true;
+gml_Object_o10_Game_Draw_73:
+  - type: findreplacetrim
+    find: |-
+      draw_sprite(s10_FuelTank, 0, (_box_x + 192) - 32, _box_y + _k1);
+      draw_sprite(s10_TorpBoost, 0, (_box_x + 192) - 32, _box_y + _k2);
+    code: |-
+      draw_sprite(s10_Items, 1, (_box_x + 192) - 32, _box_y + _k1);
+      draw_sprite(s10_Items, 2, (_box_x + 192) - 32, _box_y + _k2);
+  - type: findreplacetrim
+    find: |-
+      draw_sprite(s10_Egg, 0, (_box_x + 192) - 64, _box_y + _k2 + 16);
+    code: |-
+      draw_sprite(s10_Items, 14, (_box_x + 192) - 64, _box_y + _k2 + 16);
+gml_Object_o10_Game_Step_2:
+  - type: findappendtrim
+    find: |-
+      if (itemEquip[i] == -1)
+      {
+    code: |-
+      if ((itemSelect + 3) == 4 && global.porgy_radar == 0)
+        break;
+gml_Object_o10_Player_Draw_0:
+  - type: findappend
+    find: |-
+      var _item = o10_Game.carry[i];
+    code: |-
+      _sprite = s10_FuelTank;
+      if (_item.item_type == 13)
+        _sprite = s10_DepthCharge;
+      if (_item.item_type == 14)
+        _sprite = s10_Egg;
+  - type: findreplace
+    find: |-
+      scrSpriteColored(s10_Items, _item.item_type, _xx, _yy, 1, 1, 16777215);
+    code: |-
+      scrSpriteColored(_sprite, 0, _xx, _yy, 1, 1, 16777215);
+  - type: findreplace
+    find: |-
+      draw_sprite(s10_Items, _item.item_type, _xx, _yy);
+    code: |-
+      draw_sprite(_sprite, 0, _xx, _yy);
+  - type: findreplace
+    find: |-
+      draw_sprite(s10_Items, _item.item_type, _item.x - 8, _item.y - 8);
+    code: |-
+      draw_sprite(_sprite, 0, _item.x - 8, _item.y - 8);
+gml_Object_o10_Player_Step_0:
+  - type: findprepend
+    find: |-
+      if (blink > 0)
+    code: |-
+      porgy_update_items();
+  - type: findreplace
+    find: |-
+      if (o10_Game.collectedEggs >= 5 && !instance_exists(o10_pOption))
+    code: |-
+      if (o10_Game.collectedEggs >= 5 && !instance_exists(o10_pOption) && false)

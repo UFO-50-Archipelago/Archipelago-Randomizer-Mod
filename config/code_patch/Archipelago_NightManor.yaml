@@ -1,0 +1,11 @@
+gml_GlobalScript_scr39_CursorLook:
+  - type: findreplace
+    find: |-
+      if (!o39__Game.hasRecipe)
+    code: |-
+      if (!is_location_collected(night_manor_name_to_loc("THE RECIPE")))
+  - type: findreplace
+    find: |-
+      o39__Game.hasRecipe = true;
+    code: |-
+      scr39_TakeObjectNoSave("THE RECIPE");

@@ -1,0 +1,411 @@
+gml_Room_rmInit_Create:
+  - type: findprepend
+    find: |-
+      room_goto_next();
+    code: |-
+      instance_create(room_width + 16, 0, oArchipelago);
+
+# Disable Achievements
+gml_GlobalScript_scrAch:
+  - type: findappendtrim
+    find: |-
+      function scrAch(arg0)
+      {
+    code: |-
+      return false;
+
+gml_GlobalScript_scrActivateCoreObjects:
+  - type: findappend
+    find: |-
+      instance_activate_object(oIdleTimer);
+    code: |-
+      instance_activate_object(oArchipelago);
+gml_GlobalScript_scrCloseProfile:
+  - type: findappend
+    find: |-
+      scrPetMakeVisible(false);
+    code: |-
+      apclient_disconnect();
+gml_GlobalScript_scrLoadGame:
+  - type: findappend
+    find: |-
+      scrCloseCurrFile();
+    code: |-
+      apclient_status_update(global.AP_CLIENT_STATUS_PLAYING);
+gml_GlobalScript_scrLoadProfile:
+  - type: findprepend
+    find: |-
+      scrCloseCurrFile();
+    code: |-
+      global.ap_items_received = [];
+      for (game = 0; game <= 51; game++)
+          global.ap_items_received[game] = {};
+
+      temp1 = variable_struct_get(global.currProfileSaveData, "apItemsReceived");
+      if (!is_undefined(temp1))
+          global.ap_items_received = temp1;
+
+      global.ap_locations_found = [];
+      for (game = 0; game <= 51; game++)
+          global.ap_locations_found[game] = {};
+
+      temp2 = variable_struct_get(global.currProfileSaveData, "apLocationsFound");
+      if (!is_undefined(temp2))
+          global.ap_locations_found = temp2;
+
+      global.ap_scouts = [];
+      for (game = 0; game <= 51; game++)
+          global.ap_scouts[game] = {};
+
+      temp3 = variable_struct_get(global.currProfileSaveData, "apScouts");
+      if (!is_undefined(temp3))
+          global.ap_locations_found = temp3;
+gml_GlobalScript_scrStringManual:
+  - type: findappend
+    find: |-
+      var first5Chars = string_copy(arg0, 1, 5);
+    code: |-
+      var first3Chars = string_copy(arg0, 1, 3);
+  - type: findreplace
+    find: |-
+      if (first5Chars == "game_" || first5Chars == "hint_")
+    code: |-
+      if (first5Chars == "game_" || first5Chars == "hint_" || first3Chars == "ap_")
+gml_Object_oTitleScreens_Other_12:
+  - type: findreplace
+    find: |-
+      attractTimer++;
+    code: |-
+      attractTimer = 0;
+gml_Object_oPauseMenu_Other_10:
+  - type: findreplace
+    find: |-
+      OP_PROFILE = scrMenuItem(TYPE_SINGLE, scrString("menu_item_switch_profile"));
+    code: |-
+      OP_PROFILE = scrMenuItem(TYPE_SINGLE, scrStringManual("ap_disconnect", 0));
+
+# Undust collected cartridge
+gml_Object_oIcon_Step_0:
+  - type: findprepend
+    find: |-
+      if (selected)
+    code: |-
+      if (!dustedOff) {
+        gameID = global.mGameID[iconID];
+        dustedOff = has_item(gameID);
+      }
+
+# Library object files
+gml_Object_oLibrary_Create_0:
+  - type: findappend
+    find: |-
+      STATE_CORRUPT_FILE = 8;
+    code: |-
+      SUB_CONNECTING = 12;
+      SUB_CONNECTION_FAILED = 13;
+      SUB_SERVER_INPUT = 14;
+      SUB_PLAYER_INPUT = 15;
+      SUB_PASSWORD_INPUT = 16;
+gml_Object_oLibrary_Step_1:
+  - type: prepend
+    code: |-
+      global.attractModeLibraryTimer = 0;
+  - type: findprepend
+    find: |-
+      if (pauseAvail && (pressStart || global.steamOverlayActivated))
+    code: |-
+      if (state == STATE_PROFILE && (substate == SUB_SERVER_INPUT || substate == SUB_PLAYER_INPUT || substate == SUB_PASSWORD_INPUT || substate == SUB_CONNECTING || substate == SUB_CONNECTION_FAILED))
+        pauseAvail = false;
+gml_Object_oLibrary_Other_25:
+  - type: prepend
+    code: |-
+      exit;
+gml_Object_oLibrary_Draw_0:
+  - type: findprepend
+    find: |-
+      draw_text(8, 200, "v
+    code: |-
+      draw_text(8, 208, "ARCHIPELAGO");
+  - type: findreplace
+    find: |-
+      if (substate == SUB_CONFIRM_DELETE)
+    code: |-
+      var top = 48;
+      var fileHeight = 40;
+      for (var i = 0; i < global.NUM_PROFILES_ACCESSIBLE; i++) {
+        var menuSelXoff = 0;
+        if (i == menuSel)
+            menuSelXoff = 4;
+        var f = i + 1;
+        profile_color = 16777215;
+        if (i == 0 && substate == SUB_SERVER_INPUT)
+            profile_color = 65535;
+        else if (i == 1 && substate == SUB_PLAYER_INPUT)
+            profile_color = 65535;
+        else if (i == 2 && substate == SUB_PASSWORD_INPUT)
+            profile_color = 65535;
+        scrDrawProfile(24 + menuSelXoff, top + (i * fileHeight), f, profile_color);
+      }
+
+      var _handX = 10;
+      head_string = "";
+
+      if (substate == SUB_CLEANUP || substate == SUB_LOAD)
+        header_string = scrStringManual("ap_connection_details", 0);
+      else if (substate == SUB_CONNECTING || substate == SUB_CONNECTION_FAILED)
+        header_string = scrStringManual("ap_connecting", 0);
+      else if (substate == SUB_SERVER_INPUT)
+        header_string = scrStringManual("ap_enter_server", 0);
+      else if (substate == SUB_PLAYER_INPUT)
+        header_string = scrStringManual("ap_enter_player", 0);
+      else if (substate == SUB_PASSWORD_INPUT)
+        header_string = scrStringManual("ap_enter_password", 0);
+
+      scrDrawMenuBorder(96, 8, 192, 24);
+      scrSetFont(global.fontDefault);
+      draw_set_halign(1);
+      draw_text(192, 16, header_string);
+      draw_set_halign(0);
+
+      if (substate == SUB_CONFIRM_DELETE && false)
+  - type: findreplace
+    find: |-
+      if (substate == SUB_CONFIRM_OVERWRITE)
+    code: |-
+      if (substate == SUB_CONFIRM_OVERWRITE && false)
+  - type: findreplace
+    find: |-
+      if (substate == SUB_CONFIRM_DELETE || substate == SUB_CONFIRM_OVERWRITE)
+    code: |-
+      if (false)
+  - type: findreplace
+    find: |-
+      if (substate != SUB_CONFIRM_DELETE && substate != SUB_CONFIRM_OVERWRITE)
+    code: |-
+      if (false)
+  - type: findreplacetrim
+    find: |-
+      _handX = 50;
+    
+      if (substate == SUB_CLEANUP || substate == SUB_LOAD)
+      {
+        scrDrawMenuBorder(96, 8, 192, 24);
+        scrSetFont(global.fontDefault);
+        scrStringDrawCE(192, 16, "prof_head_select_profile", 4);
+        
+        if (menuSel < global.NUM_PROFILES_ACCESSIBLE)
+            draw_sprite(sMenuHand, 0, _handX, top + (menuSel * fileHeight) + 9);
+        
+        var selPos = global.NUM_PROFILES_ACCESSIBLE;
+        var yPos = top + (selPos * fileHeight);
+        draw_sprite(sMenuCopy, 0, 72 + ((menuSel == selPos) * 10), yPos + 8);
+        
+        if (menuSel == selPos)
+        {
+            scrSetFont(global.fontTall);
+            scrStringDraw(104, yPos, "prof_menu_copy");
+            draw_sprite(sMenuHand, 0, _handX, yPos + 1);
+        }
+        
+        selPos = global.NUM_PROFILES_ACCESSIBLE + 1;
+        yPos = (top + (selPos * fileHeight)) - 16;
+        draw_sprite(sMenuBomb, 0, 72 + ((menuSel == selPos) * 10), yPos + 8);
+        
+        if (menuSel == selPos)
+        {
+            scrSetFont(global.fontTall);
+            scrStringDraw(104, yPos, "prof_menu_delete");
+            draw_sprite(sMenuHand, 0, _handX, yPos + 1);
+        }
+      }
+    code: |-
+      if (substate == SUB_CLEANUP || substate == SUB_LOAD) {
+        if (menuSel < global.NUM_PROFILES_ACCESSIBLE)
+            draw_sprite(sMenuHand, 0, _handX, top + (menuSel * fileHeight) + 9);
+
+        var selPos = global.NUM_PROFILES_ACCESSIBLE;
+        var yPos = top + (selPos * fileHeight);
+        draw_sprite(sMenuCopy, 0, 32 + ((menuSel == selPos) * 10), yPos + 8);
+        
+        if (menuSel == selPos)
+        {
+            scrSetFont(global.fontTall);
+            draw_set_halign(0);
+            draw_text(64, yPos, scrStringManual("ap_connect", 0));
+            draw_sprite(sMenuHand, 0, _handX, yPos + 1);
+        }
+      }
+  - type: findreplace
+    find: |-
+      if (substate == SUB_DELETE)
+    code: |-
+      if (substate == SUB_DELETE && false)
+  - type: findreplace
+    find: |-
+      if (substate == SUB_COPY_FROM)
+    code: |-
+      if (substate == SUB_COPY_FROM && false)
+  - type: findreplace
+    find: |-
+      if (substate == SUB_COPY_TO)
+    code: |-
+      if (substate == SUB_COPY_TO && false)
+  - type: findreplacetrim
+    find: |-
+      if (substate == SUB_SORT_SELECT || substate == SUB_SORT_PERFORM || substate == SUB_PET_COLLECTION || substate == SUB_PROGRESS_STATS)
+      {
+        var _TEXT_Y = 206 + global.jpvoff;
+        var _infoBarSprite;
+
+        if (global.language != global.LANG_JAPANESE)
+          _infoBarSprite = sInfoBar;
+        else
+          _infoBarSprite = sInfoBar_JP;
+          
+        if (global.selSort == global.SORT_FAVORITE)
+        {
+          var _numFavs = 0;
+              
+          for (var i = 1; i <= global.NUM_GAMES; i++)
+            _numFavs += favs[i];
+              
+          if (_numFavs == 0)
+          {
+            scrDrawMenuBorder(_xv + 90, _yv + 48, 210, 72);
+            scrSetFont(global.fontNoShadow);
+            draw_set_color(global.palette[5]);
+            scrStringDrawCE(_xv + 192, _yv + 64, "fave_no_favorites", 2);
+            scrFontDefault();
+            var str = string_line_breaks(scrStringVal("fave_instructions", "[2]"), 22, 4);
+            scrDrawTextInput(_xv + 192, _yv + 80, str[0], 0, 0, 2);
+            scrDrawTextInput(_xv + 192, _yv + 88, str[1], 0, 0, 2);
+            scrDrawTextInput(_xv + 192, _yv + 96, str[2], 0, 0, 2);
+            scrDrawTextInput(_xv + 192, _yv + 104, str[3], 0, 0, 2);
+          }
+        }
+    code: |-
+      if (substate == SUB_SORT_SELECT || substate == SUB_SORT_PERFORM || substate == SUB_PET_COLLECTION || substate == SUB_PROGRESS_STATS) {
+        var _TEXT_Y = 206 + global.jpvoff;
+        var _infoBarSprite;
+        
+        if (global.language != global.LANG_JAPANESE)
+          _infoBarSprite = sInfoBar;
+        else
+          _infoBarSprite = sInfoBar_JP;
+  - type: findreplacetrim
+    find: |-
+      if (global.all50 > 0)
+      {
+        draw_text(8, 206, scrString("bar_time"));
+          
+        if (global.all50 == 1)
+          draw_text(88, _TEXT_Y, scrTimeFormat(global.goldTimeAll, 4));
+        else
+          draw_text(88, _TEXT_Y, scrTimeFormat(global.cherryTimeAll, 4));
+      }
+      else
+      {
+        draw_text(8, _TEXT_Y, scrString("bar_filter"));
+        var _xLeftChange = -32;
+        var _sortName = string_even(global.SORT_DISPLAY_NAME[global.selSort], 3);
+          
+        if (global.selSort == global.SORT_MULTIPLAYER)
+        {
+          if (global.multStyle == 1)
+            _sortName = scrStringEven("filter_name_coop", 3);
+          else if (global.multStyle == 2)
+            _sortName = scrStringEven("filter_name_versus", 3);
+        }
+          
+        var _xLeft = (232 + _xLeftChange) - ((string_length(_sortName) * 8) / 2);
+          
+        if (global.selSort == global.SORT_PET)
+        {
+          draw_sprite(sWinIcons, global.GARDEN_WIN, _xLeft - 8, _TEXT_Y);
+          _xLeft += 8;
+        }
+          
+        draw_text(_xLeft, _TEXT_Y, _sortName);
+          
+        if (substate != SUB_PET_COLLECTION && substate != SUB_PROGRESS_STATS)
+        {
+          if ((floor(stateCounter / 12) % 2) == 0)
+          {
+            if (tPageCycleLeft == 0)
+              draw_sprite_ext(sLittleArrow, 0, 168 + _xLeftChange, _TEXT_Y, -1, 1, 0, global.palette[5], 1);
+            
+            if (tPageCycleRight == 0)
+              draw_sprite_ext(sLittleArrow, 0, 295 + _xLeftChange, _TEXT_Y, 1, 1, 0, global.palette[5], 1);
+          }
+        }
+          
+        scrFontDefault();
+        var _sortButtonX = 304;
+          
+        if (substate == SUB_SORT_SELECT && global.selSort == global.SORT_MULTIPLAYER)
+        {
+          scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_type", "[2"), 0, 0, false);
+        }
+        else if (substate == SUB_SORT_SELECT && global.selSort == global.SORT_RANDOM)
+        {
+          scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_remix", "[2"), 0, 0, false);
+        }
+        else if (substate == SUB_SORT_SELECT && global.selSort == global.SORT_PET)
+        {
+          scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_list", "[2"), 0, 0, false);
+        }
+        else if (global.selSort == global.SORT_PET)
+        {
+          scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_close", "[2"), 0, 0, false);
+        }
+        else if (substate == SUB_SORT_SELECT && global.selSort == global.SORT_PROGRESS)
+        {
+          if (global.goldWins == 50)
+            scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_times", "[2"), 0, 0, false);
+        }
+        else if (global.selSort == global.SORT_PROGRESS)
+        {
+          scrDrawTextInput(_sortButtonX, _TEXT_Y, scrStringVal("filter_button_close", "[2"), 0, 0, false);
+        }
+      }
+    code: |-
+      scrSetFont(global.fontDefault);
+      draw_set_halign(0);
+      draw_sprite(sWinIcons, global.GOLD_WIN, 8, 206);
+      var winString;
+
+      if (global.goldWins < 10)
+        winString = "0" + string(global.goldWins);
+      else
+        winString = string(global.cherryWins);
+
+      draw_text(56, 206, winString);
+      var _xLeftChange = -32
+      var _sortName = string_even(global.SORT_DISPLAY_NAME[global.selSort], 3);
+
+      if (global.selSort == global.SORT_YEAR)
+        _sortName = scrStringManual("ap_game_library", 0);
+
+      var _xLeft = (232 + _xLeftChange) - ((string_length(_sortName) * 8) / 2);
+
+      if (global.selSort == global.SORT_PET) {
+        draw_sprite(sWinIcons, global.GARDEN_WIN, _xLeft - 8, 206);
+        _xLeft += 8;
+      }
+
+      draw_text(_xLeft, 206, _sortName);
+
+      if (substate != SUB_PET_COLLECTION && substate != SUB_PROGRESS_STATS) {
+        if ((floor(stateCounter / 12) % 2) == 0) {
+          if (tPageCycleLeft == 0)
+            draw_sprite_ext(sLittleArrow, 0, 168 + _xLeftChange, 206, -1, 1, 0, global.palette[5], 1);
+          if (tPageCycleRight == 0)
+            draw_sprite_ext(sLittleArrow, 0, 295 + _xLeftChange, 206, 1, 1, 0, global.palette[5], 1);
+        }
+      }
+
+      scrFontDefault();
+      var _sortButtonX = 304;
+
+      if (substate == SUB_SORT_SELECT && global.selSort == global.SORT_PET)
+        scrDrawTextInput(_sortButtonX, 206, scrStringVal("filter_button_list", "[2"), 0, 0, false);

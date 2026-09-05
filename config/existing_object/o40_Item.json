@@ -1,0 +1,11 @@
+{
+  "Sprite": "s40_Treasure",
+  "Parent": null,
+  "TextureMaskID": null,
+  "CollisionShape": "Circle",
+  "IsVisible": true,
+  "IsSolid": false,
+  "IsPersistent": false,
+  "UsesPhysics": false,
+  "IsSensor": false
+}

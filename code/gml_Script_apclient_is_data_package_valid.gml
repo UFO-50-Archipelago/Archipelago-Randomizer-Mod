@@ -1,0 +1,1 @@
+return external_call(global.ext_apclient_is_data_package_valid);

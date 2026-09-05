@@ -1,0 +1,59 @@
+gml_GlobalScript_scr36_SetupGame:
+  - type: findreplace 
+    find: |-
+      money[p] = 0;
+    code: |-
+      money[p] = get_item_count(0);
+  - type: findreplace 
+    find: |-
+      popularity[p] = 0;
+    code: |-
+      popularity[p] = get_item_count(1);
+  - type: findappend 
+    find: |-
+      scr36_SortCharacters(store);
+    code: |-
+      for (var p = 0; p < 2; p++)
+      {
+        if (money[p] > MONEY_MAX) money[p] = MONEY_MAX;
+        if (popularity[p] > POP_MAX) popularity[p] = POP_MAX;
+      }
+
+gml_Object_o36_Game_Other_18:
+  - type: findappend
+    find: |-
+      if (scenarioWins[i] > 0)
+    code: |-
+      collect_location(i);
+      if (scenarioWins[i] > 0 or is_location_collected(i))
+
+gml_Object_o36_Game_Draw_0:
+  - type: findprepend 
+    find: |-
+      for (var i = 0; i < 6; i++)
+    code: |-
+      var scenariosBeat = 0;
+      
+  - type: findprepend 
+    find: |-
+      var xShift, yShift;
+    code: |-
+      if (i < 5 )
+      {
+        if (scenarioWins[i] < 1 and is_location_collected(i)) scenarioWins[i] = 1;
+        if (scenarioWins[i]) scenariosBeat++;
+      }
+      
+  - type: findprepend 
+    find: |-
+      if (scenarioWins[i] > 9)
+    code: |-
+      if (i >= 0 and i <= 4) collect_location(i);
+    
+  - type: findprepend
+    find: |-
+      if (numPlayers == 1 && scenarioIndex == 5 && longestStreak > 0)
+    code: |-
+      if (scenariosBeat >= 1) scrWin(global.GARDEN_WIN);
+      if (scenariosBeat >= 5) scrWin(global.GOLD_WIN);
+      if (scenarioWins[5] >= CHERRY_GOAL) scrWin(global.CHERRY_WIN);

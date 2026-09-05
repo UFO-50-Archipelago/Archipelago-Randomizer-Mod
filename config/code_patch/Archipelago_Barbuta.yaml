@@ -1,0 +1,110 @@
+gml_GlobalScript_scr40_SaveGame:
+  - type: findprepend
+    find: |-
+      scrSetDetail(2, totalItemsFound);
+    code: |-
+      scrWriteReal("prefersSword", prefersSword);
+  - type: findappend
+    find: |-
+      itemsFound[i] = scrReadReal("itemsFound_" + string(i), false);
+    code: |-
+      prefersSword = scrReadReal("prefersSword", true);
+gml_Object_o40_Mas_Create_0:
+  - type: findappend
+    find: |-
+      scrInputClear();
+    code: |-
+      scout_location(1);
+      scout_location(2);
+      scout_location(3);
+      scout_location(12);
+      scout_location(13);
+      scout_location(14);
+      scout_location(7);
+  - type: append
+    code: |-
+      lifeGranted = 0;
+      pointsGranted = 0;
+      wall_broken = false;
+gml_Object_o40_Mas_Step_0:
+  - type: findprepend
+    find: |-
+      if (rTrans == 1)
+    code: |-
+      extraLife = get_item_count(11);
+      if (life < 6 && life > 0) {
+        if (lifeGranted < extraLife) {
+          life += 1;
+          lifeGranted += 1;
+        }
+      }
+      newPoints = (get_item_count(0) * 50) + (get_item_count(1) * 100);
+      if (newPoints > pointsGranted) {
+        points += (newPoints - pointsGranted);
+        pointsGranted = newPoints;
+      }
+
+      if (has_item(7) && (prefersSword || !has_item(6)))
+        scr40_Item(ITEM_BLOOD_SWORD);
+      if (has_item(3))
+        scr40_Item(ITEM_NECKLACE);
+      if (has_item(4))
+        scr40_Item(ITEM_PIN);
+      if (has_item(2))
+        scr40_Item(ITEM_UMBRELLA);
+      if (has_item(5))
+        scr40_Item(ITEM_CLIMB_CANDY);
+      if (has_item(8))
+        scr40_Item(ITEM_KEY);
+      if (has_item(10))
+        scr40_Item(ITEM_TRASH);
+      if (has_item(6) && !prefersSword)
+        scr40_Item(ITEM_ROD);
+      if (has_item(9))
+        scr40_Item(ITEM_BAT_ORB);
+
+      if (has_item(12) && !wall_broken) {
+        block = instance_position(1512, 472, oBlockPar);
+        with (block)
+          instance_destroy();
+        for (var i = 0; i < 4; i++) {
+          for (var j = 0; j < 5; j++)
+            tile_add(bg40_Traps, 112, 112, 16, 16, 1504 + (i * 16), 464 + (j * 16), 95);
+        }
+        blok = instance_place(1568, 608, oBlockPar);
+        with (blok)
+          instance_destroy();
+        wall_broken = true;
+      }
+gml_Object_o40_Mas_Draw_0:
+  - type: findprepend
+    find: |-
+      if (gameend >= 2)
+    code: |-
+      extraEggs = get_item_count(11) - lifeGranted;
+      if (extraEggs > 8)
+        extraEggs = 8;
+      for (var i = 0; i < extraEggs; i++)
+        draw_sprite(s40_Egg, 0, xv + 336 + 36, yv + 28 + (24 * i));
+gml_Object_o40_Player_Step_0:
+  - type: findreplacetrim
+    find: |-
+      if (treasure.step == 1)
+      {
+        scrSfx(sfx_coin00, 70);
+        o40_Mas.points += treasure.worth;
+    code: |-
+      if (treasure.step >= 1) {
+        if (!is_location_collected(treasure.location)) {
+            scrSfx(sfx_score02, 70);
+            collect_location(treasure.location);
+        }
+  - type: findreplacetrim
+    find: |-
+      scrSfx(sfx_score02, 70);
+      scr40_Item(_item.conType);
+    code: |-
+      if (!is_location_collected(_item.location)) {
+          scrSfx(sfx_score02, 70);
+          collect_location(_item.location);
+      }

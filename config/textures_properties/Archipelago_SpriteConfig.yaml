@@ -1,0 +1,416 @@
+s07_Archipelacodes:
+  frames: 8
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 0
+  frame_speed: 15
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s07_iClone:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 1
+  bbox_right: 14
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s07_iShield:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s07_iStabilizer:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 1
+  bbox_right: 14
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s07_ModBig:
+  frames: 9
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 31
+  bbox_bottom: 47
+  bbox_top: 0
+  sepmasks: 0
+
+s07_ModFire:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 14
+  bbox_bottom: 30
+  bbox_top: 9
+  sepmasks: 0
+
+s07_ModForce:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 14
+  bbox_bottom: 30
+  bbox_top: 9
+  sepmasks: 0
+
+s07_ModMulti:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 14
+  bbox_bottom: 30
+  bbox_top: 9
+  sepmasks: 0
+
+s07_ModPulse:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 14
+  bbox_bottom: 30
+  bbox_top: 9
+  sepmasks: 0
+
+s10_Armor:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_BusterSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_ChargeSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_DrillSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_Egg:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_FuelSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_FuelTank:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 2
+  bbox_left: 4
+  bbox_right: 11
+  bbox_bottom: 11
+  bbox_top: 4
+  sepmasks: 0
+
+s10_HomingSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_LightSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_MissileSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_PowerDash:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_RadarSys:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+s10_TorpBoost:
+  frames: 1
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 2
+  bbox_left: 4
+  bbox_right: 11
+  bbox_bottom: 11
+  bbox_top: 4
+  sepmasks: 0
+
+s40_Treasure:
+  frames: 9
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+sMenuCopy:
+  frames: 2
+  x: 8
+  y: 8
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 1
+  frame_speed: 1
+  bounding_box_type: 0
+  bbox_left: 1
+  bbox_right: 14
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+
+sPauseMenuIcons:
+  frames: 11
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 0
+  frame_speed: 30
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 14
+  bbox_top: 1
+  sepmasks: 0
+
+sSaveIconArchipelago:
+  frames: 25
+  x: 0
+  y: 0
+  transparent: false
+  smooth: false
+  preload: false
+  speed_type: 0
+  frame_speed: 15
+  bounding_box_type: 0
+  bbox_left: 0
+  bbox_right: 15
+  bbox_bottom: 15
+  bbox_top: 0
+  sepmasks: 0
+

@@ -1,0 +1,30 @@
+gml_GlobalScript_scrLoadLibraryText:
+  - type: findappend
+    find: |-
+      scrLoadInternalText();
+    code: |-
+      global.TEXT_META.ap_connection_details = "CONNECTION DETAILS";
+      global.TEXT_META.ap_enter_server = "ENTER SERVER:PORT";
+      global.TEXT_META.ap_server = "SERVER";
+      global.TEXT_META.ap_enter_player = "ENTER PLAYER NAME";
+      global.TEXT_META.ap_player = "PLAYER";
+      global.TEXT_META.ap_enter_password = "ENTER PASSWORD";
+      global.TEXT_META.ap_password = "PASSWORD";
+      global.TEXT_META.ap_connect = "CONNECT";
+      global.TEXT_META.ap_connecting = "CONNECTING";
+      global.TEXT_META.ap_game_library = "GAME LIBRARY";
+      global.TEXT_META.ap_disconnect = "Disconnect";
+      global.TEXT_META.ap_got_from = "Got: {0}\nFrom: {1}";
+      global.TEXT_META.ap_sent_to = "Sent: {0}\nTo: {1}";
+      global.TEXT_META.ap_for = "For:";
+      global.TEXT_META.ap_40_rod_man_1 = "SWORDS ARE NICE, BUT DON'T YOU LIKE RODS BETTER?";
+      global.TEXT_META.ap_40_rod_man_2 = "RODS ARE NICE, BUT DON'T YOU LIKE SWORDS BETTER?";
+      global.TEXT_META.ap_40_hint_a = "HELLO. WELCOME TO MY HOME! IF YOU WISH TO MAKE ANY HEADWAY HERE, KEEP AN EYE OUT FOR ANYTHING OUT OF THE NORM.";
+      global.TEXT_META.ap_40_hint_b = "PUZZLED? TRY CLEANING OUT THE ROOM FIRST.";
+      global.TEXT_META.ap_40_hint_c = "SOMETIMES THE SOLUTION TO YOUR TROUBLES LIE ELSEWHERE.";
+      global.TEXT_META.ap_40_hint_d = "IF YOU WANT {0}'s {1}, REMEMBER WHAT THEY SAY ABOUT MAKING OMELETTES.";
+      global.TEXT_META.ap_40_hint_e = "PRAY BY THE ALTAR FOR {0}'s {1}!";
+      global.TEXT_META.ap_40_hammer_man = "DO YOU WANT {0}'s {1} FOR 500 COINS?";
+      global.TEXT_META.ap_07_stuck_1 = "RESCUE PROTOCOL:";
+      global.TEXT_META.ap_07_stuck_2 = "IF STUCK, PRESS AND\nHOLD THE DOWN BUTTON.\nHELP WILL BE HERE SOON.";
+      global.TEXT_META.ap_07_terminal = "WHY DO PEOPLE KEEP LEAVING THEIR STUFF ON THESE SECURITY TERMINALS?";

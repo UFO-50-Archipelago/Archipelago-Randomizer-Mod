@@ -1,0 +1,110 @@
+gml_GlobalScript_scrInit:
+  - type: findreplace
+    find: |-
+      global.SAVE_FILE = "save*.ufo";
+    code: |-
+      global.SAVE_FILE = "save_NOT_CONNECTED.ufo";
+gml_GlobalScript_scrCloseCurrFile:
+  - type: findreplace
+    find: |-
+      var _filename = string_replace(global.SAVE_FILE, "*", string(global.currProfileSaveNum));
+    code: |-
+      var _filename = global.SAVE_FILE;
+gml_GlobalScript_scrOpenFileManual:
+  - type: findreplace
+    find: |-
+      var _filename = string_replace(global.SAVE_FILE, "*", string(arg0));
+    code: |-
+      var _filename = global.SAVE_FILE;
+gml_GlobalScript_scrReadConfig:
+  - type: findreplace
+    find: |-
+      function scrReadConfig(arg0, arg1)
+    code: |-
+      function scrReadConfig(arg0, arg1, arg2)
+  - type: findreplace
+    find: |-
+      var _defaultValue = real(arg1);
+    code: |-
+      var _defaultValue;
+      if (arg2)
+        _defaultValue = string(arg1);
+      else
+        _defaultValue = real(arg1);
+  - type: findreplace
+    find: |-
+      _value = real(_value);
+    code: |-
+      if (arg2)
+        _value = string(_value);
+      else
+        _value = real(_value);
+gml_GlobalScript_scrSaveConfig:
+  - type: findprepend
+    find: |-
+      scrCloseConfig();
+    code: |-
+      scrWriteConfig("ap_server", global.ap_server, true);
+      scrWriteConfig("ap_player", global.ap_player, true);
+      scrWriteConfig("ap_password", global.ap_password, true);
+gml_GlobalScript_scrSaveGame:
+  - type: findreplace
+    find: |-
+      var _fileFrom = string_replace(global.SAVE_FILE, "*", string(global.currFile));
+    code: |-
+      var _fileFrom = global.SAVE_FILE;
+gml_GlobalScript_scrSaveNotification:
+  - type: findappendtrim
+    find: |-
+      else if (type == global.GARDEN_WIN_FAST)
+        sprite_index = sSaveIconGardenFast;
+    code: |-
+      if (type == global.ARCHIPELAGO_NOTIFICATION)
+        sprite_index = sSaveIconArchipelago;
+
+      if (type == global.GARDEN_WIN || type == global.GARDEN_WIN_FAST)
+        collect_location(997);
+      else if (type == global.GOLD_WIN || type == global.GOLD_WIN_FAST)
+        collect_location(998);
+      else if (type == global.CHERRY_WIN || type == global.CHERRY_WIN_FAST) {
+        collect_location(998);
+        collect_location(999);
+      }
+
+      if (type == global.GARDEN_WIN || type == global.GARDEN_WIN_FAST || type == global.GOLD_WIN || type == global.GOLD_WIN_FAST || type == global.CHERRY_WIN || type == global.CHERRY_WIN_FAST)
+        check_victory();
+gml_GlobalScript_scrSaveProfile:
+  - type: findprepend
+    find: |-
+      scrCloseCurrFile();
+    code: |-
+      variable_struct_set(global.currProfileSaveData, "apItemsReceived", global.ap_items_received);
+      variable_struct_set(global.currProfileSaveData, "apLocationsFound", global.ap_locations_found);
+      variable_struct_set(global.currProfileSaveData, "apScouts", global.ap_scouts);
+gml_GlobalScript_scrWriteConfig:
+  - type: findreplace
+    find: |-
+      function scrWriteConfig(arg0, arg1)
+    code: |-
+      function scrWriteConfig(arg0, arg1, arg2)
+  - type: findreplace
+    find: |-
+      var _value = real(arg1);
+    code: |-
+      var _value;
+      if (arg2)
+        _value = string(arg1);
+      else
+        _value = real(arg1);
+gml_Object_oSaveIcon_Draw_73:
+  - type: append
+    code: |-
+      if (type == global.ARCHIPELAGO_NOTIFICATION) {
+          scrSetFont(global.fontDefault);
+          draw_set_halign(2);
+          draw_set_colour(0);
+          draw_text((camera_get_view_x(view_get_camera(0)) + 384) - 20 - 1, (camera_get_view_y(view_get_camera(0)) + 216) - 16 - 1, global.ap_message);
+          draw_set_colour(16777215);
+          draw_text((camera_get_view_x(view_get_camera(0)) + 384) - 20, (camera_get_view_y(view_get_camera(0)) + 216) - 16, global.ap_message);
+          draw_set_halign(0);
+      }
