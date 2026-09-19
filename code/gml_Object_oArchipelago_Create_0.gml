@@ -54,3 +54,4 @@ global.GOAL_GOLD = 1;
 global.GOAL_CHERRY = 2;
 global.porgy_check_on_touch = false;
 global.porgy_radar = false;
+global.divers_lever_check = false;

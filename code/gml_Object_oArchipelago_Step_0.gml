@@ -52,6 +52,7 @@ switch (apclient_json_source())
         }
         global.porgy_check_on_touch = apclient_json_number_at(0, "porgy_check_on_touch");
         global.porgy_radar = apclient_json_number_at(0, "porgy_radar");
+		global.divers_lever_check = apclient_json_number_at(0, "divers_lever_check");
         break;
     case "ap_socket_connected":
         apclient_connect_slot(global.ap_player, global.ap_password, "[]");
